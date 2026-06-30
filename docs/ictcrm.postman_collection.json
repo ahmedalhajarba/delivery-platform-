@@ -1,0 +1,259 @@
+{
+  "info": {
+    "_postman_id": "9e8f6d20-c32f-46ef-a6f1-20e8df2dbe10",
+    "name": "ICTCRM Integration - newp2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection for testing ICTCRM integration endpoints in Laravel platform."
+  },
+  "item": [
+    {
+      "name": "Webhook - Incoming Call",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-ICTCRM-TOKEN",
+            "value": "{{webhookToken}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"{{callerPhone}}\",\n  \"call_id\": \"{{callId}}\",\n  \"direction\": \"inbound\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/integrations/ictcrm/incoming-call",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "integrations",
+            "ictcrm",
+            "incoming-call"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Screen Pop (JSON)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Cookie",
+            "value": "{{adminCookie}}"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/admin/call-center/screen-pop?phone={{callerPhone}}&call_id={{callId}}&direction=inbound&json=1",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "call-center",
+            "screen-pop"
+          ],
+          "query": [
+            {
+              "key": "phone",
+              "value": "{{callerPhone}}"
+            },
+            {
+              "key": "call_id",
+              "value": "{{callId}}"
+            },
+            {
+              "key": "direction",
+              "value": "inbound"
+            },
+            {
+              "key": "json",
+              "value": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Lookup Caller",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "{{adminCookie}}"
+          },
+          {
+            "key": "X-CSRF-TOKEN",
+            "value": "{{csrfToken}}"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"{{callerPhone}}\",\n  \"call_id\": \"{{callId}}\",\n  \"direction\": \"inbound\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/call-center/lookup",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "call-center",
+            "lookup"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Create Ticket From Call",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "{{adminCookie}}"
+          },
+          {
+            "key": "X-CSRF-TOKEN",
+            "value": "{{csrfToken}}"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phone\": \"{{callerPhone}}\",\n  \"call_id\": \"{{callId}}\",\n  \"direction\": \"inbound\",\n  \"subject\": \"Incoming support call\",\n  \"priority\": \"high\",\n  \"description\": \"Call-center test ticket created from Postman.\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/call-center/create-ticket",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "call-center",
+            "create-ticket"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Dial",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "{{adminCookie}}"
+          },
+          {
+            "key": "X-CSRF-TOKEN",
+            "value": "{{csrfToken}}"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"extension\": \"{{agentExtension}}\",\n  \"phone\": \"{{dialTargetPhone}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/call-center/dial",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "call-center",
+            "dial"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Transfer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Cookie",
+            "value": "{{adminCookie}}"
+          },
+          {
+            "key": "X-CSRF-TOKEN",
+            "value": "{{csrfToken}}"
+          },
+          {
+            "key": "X-Requested-With",
+            "value": "XMLHttpRequest"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"call_id\": \"{{callId}}\",\n  \"to_extension\": \"{{transferToExtension}}\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/admin/call-center/transfer",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "admin",
+            "call-center",
+            "transfer"
+          ]
+        }
+      }
+    }
+  ]
+}

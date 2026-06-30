@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "2cc1e8e1-11b9-4f2c-81b9-914d420a2f4d",
+    "name": "Customer Technical API - newp2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Customer integration API collection: orders, tracking, platform services, subscriptions."
+  },
+  "item": [
+    {
+      "name": "Orders - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/orders?per_page=20",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "orders"],
+          "query": [{ "key": "per_page", "value": "20" }]
+        }
+      }
+    },
+    {
+      "name": "Orders - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"shipment_type\": \"package\",\n  \"package_type\": \"box\",\n  \"package_content\": \"Electronics\",\n  \"packages_count\": 1,\n  \"package_weight\": 1.5,\n  \"stated_value\": 200,\n  \"reference_number\": \"CUST-ORD-1001\",\n  \"order_type\": \"single\",\n  \"payment_status\": \"pending\",\n  \"cod_amount\": 0\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/orders",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "orders"]
+        }
+      }
+    },
+    {
+      "name": "Tracking - Single",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/tracking/{{waybill}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "tracking", "{{waybill}}"]
+        }
+      }
+    },
+    {
+      "name": "Tracking - Batch",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"waybills\": [\"{{waybill}}\", \"{{waybill2}}\"]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/tracking/batch",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "tracking", "batch"]
+        }
+      }
+    },
+    {
+      "name": "Platform Services - Catalog",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/platform-services/catalog",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "platform-services", "catalog"]
+        }
+      }
+    },
+    {
+      "name": "Platform Services - Purchase Subscription",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"service_type\": \"subscription\",\n  \"subscription_plan_id\": {{subscriptionPlanId}},\n  \"selected_extras\": [\"packaging\"],\n  \"payment_method\": \"bank_transfer\",\n  \"bank_name\": \"Bank Name\",\n  \"bank_iban\": \"SA0000000000000000000000\",\n  \"bank_account_number\": \"123456789\",\n  \"transfer_reference\": \"TRX-9001\",\n  \"user_notes\": \"Integration purchase request\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/platform-services/purchase",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "platform-services", "purchase"]
+        }
+      }
+    },
+    {
+      "name": "Platform Services - Purchases List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/platform-services/purchases?per_page=20",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "platform-services", "purchases"],
+          "query": [{ "key": "per_page", "value": "20" }]
+        }
+      }
+    },
+    {
+      "name": "Subscriptions - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/subscriptions?per_page=20",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "subscriptions"],
+          "query": [{ "key": "per_page", "value": "20" }]
+        }
+      }
+    },
+    {
+      "name": "Subscriptions - Show",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "X-CLIENT-KEY", "value": "{{clientKey}}" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/customer/v1/subscriptions/{{subscriptionId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "customer", "v1", "subscriptions", "{{subscriptionId}}"]
+        }
+      }
+    }
+  ]
+}
